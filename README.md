@@ -1,2 +1,4 @@
-typo3-be_ipoa
-=============
+IPOA Template
+======================
+
+> Backend template and rights management for IPOA homepage

@@ -1,0 +1,5 @@
+plugin.tx_beipoa.view {
+	templateRootPath = EXT:be_ipoa/Resources/Private/Templates/
+	partialRootPath = EXT:be_ipoa/Resources/Private/Partials/
+	layoutRootPath = EXT:be_ipoa/Resources/Private/Layouts/
+}
