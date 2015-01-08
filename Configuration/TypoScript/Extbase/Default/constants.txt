@@ -1,0 +1,10 @@
+plugin.tx_beipoa {
+    view {
+        # cat=plugin.tx_bk2kcontentelements/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:be_ipoa/Resources/Private/Templates/
+        # cat=plugin.tx_bk2kcontentelements/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:be_ipoa/Resources/Private/Partials/
+        # cat=plugin.tx_bk2kcontentelements/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:be_ipoa/Resources/Private/Layouts/
+    }
+}
