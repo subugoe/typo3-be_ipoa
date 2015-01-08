@@ -34,7 +34,7 @@ mod.web_list {
 	deniedNewTables = tx_devlog,backend_layout,sys_domain,tx_rtehtmlarea_acronym,sys_template,tx_scheduler_task_group,sys_note,sys_file_collection,tx_beacl_acl
 }
 
-[TS][usergroup = {$ids.reducedRightsEditors}]
+[TS][usergroup = 3]
 // Setzen der Benutzerrechte beim Anlegen von Seiten und Inhalt
 // TODO: muss noch durch Variablen gesteuert werden
 
