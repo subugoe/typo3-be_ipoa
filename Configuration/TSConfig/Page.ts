@@ -51,6 +51,39 @@ TCEFORM {
 		author.disabled = 0
 		doktype.removeItems = spacer
 
+		// Seiteneigenschaften
+		// General
+		subtitle.disabled = 1
+		nav_title.disabled = 1
+		target.disabled = 1
+		// Access
+		fe_group.disabled = 1
+		extendToSubpages.disabled = 1
+		fe_login_mode.disabled = 1
+		// Metadata
+		abstract.disabled  = 1
+		author.disabled = 1
+		author_email.disabled = 1
+		lastUpdated.disabled = 1
+		// Appearance
+		backend_layout.disabled  = 1
+		backend_layout_next_level.disabled  = 1
+		content_from_pid.disabled = 1
+		// Behaviour
+		alias.disabled  = 1
+		url_scheme.disabled = 1
+		cache_timeout.disabled = 1
+		no_cache.disabled = 1
+		cache_tags.disabled  = 1
+		is_siteroot.disabled = 1
+		no_search.disabled = 1
+		editlock.disabled = 1
+		php_tree_stop.disabled = 1
+		module.disabled = 1
+		// Resources
+		media.disabled  = 1
+		storage_pid.disabled  = 1
+		TSconfig.disabled  = 1
 	}
 
 	tt_content {
