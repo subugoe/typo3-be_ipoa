@@ -94,7 +94,7 @@ TCEFORM {
 	tt_content {
 		// Unerwünschte Seitentypen ausblenden (sowohl im "new content element wizard" als auch im Menü)
 		// sollen text, image,table, filelist, sitemap(menu), plugin und eigene Elemente bleiben
-		CType.removeItems = header,textpic,bullets,media,shortcut,html,div,multimedia,mailform,login,search,tx_beacl_acl
+		CType.removeItems = header,textpic,bullets,media,shortcut,html,div,multimedia,mailform,login,search,tx_beacl_acl,uploads
 
 		// Unerwünschte Auswahlmöglichkeiten bei Inhaltselementen entfernen
 		header_layout.removeItems = 1,2,3,4,5
