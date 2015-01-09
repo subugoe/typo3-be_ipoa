@@ -1,5 +1,0 @@
-plugin.tx_beipoa.view {
-	templateRootPath = {$plugin.tx_beipoa.view.templateRootPath}
-	partialRootPath = {$plugin.tx_beipoa.view.partialRootPath}
-	layoutRootPath = {$plugin.tx_beipoa.view.layoutRootPath}
-}
