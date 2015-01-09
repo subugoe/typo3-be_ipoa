@@ -6,29 +6,40 @@ if (!defined('TYPO3_MODE')) {
 /**
  * Default TypoScript
  */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Extbase/Default', 'BeIpoa Extbase CE Default');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Extbase/Replacement', 'BeIpoa Extbase CEs Replacement');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Fluidtemplate/Replacement', 'BeIpoa Fluidtemplate CEs Replacement');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:'.$_EXTKEY.'/Configuration/TSConfig/Page.ts">');
-
-
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+		'<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $_EXTKEY . '/Configuration/TSConfig/Page.ts">'
+);
+// Also include TCEMAIN:
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
+		'<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $_EXTKEY . '/Configuration/TSConfig/Page.ts">'
+);
 /**
- * Register Custom Content Element
+ * Register Custom Content Elements
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'Subugoe.'.$_EXTKEY,
     'Fluidcontentelement',
-    'Fluid content element'
+    'Audio content element'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'Subugoe.'.$_EXTKEY,
+    'Audioelement',
+    'Audioelement'
 );
 
 
 /**
- * Prepare TCA for Custom Content Element
+ * Prepare TCA for Custom Content Elements
  */
 \TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('tt_content');
-$TCA['tt_content']['types']['beipoa_fluidcontentelement']['showitem'] = $TCA['tt_content']['types']['textpic']['showitem'];
+$TCA['tt_content']['types']['beipoa_fluidcontentelement']['showitem'] = $TCA['tt_content']['types']['media']['showitem'];
+$TCA['tt_content']['types']['beipoa_audioelement']['showitem'] = $TCA['tt_content']['types']['media']['showitem'];
 
 
+/**
+ * Settings for divided flags
+ */
 if (TYPO3_MODE == 'BE' || TYPO3_MODE == 'FE' && isset($GLOBALS['BE_USER'])) {
 	// Setting the relative path to the extension in temp. variable:
 	$temp_ipoa = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY);

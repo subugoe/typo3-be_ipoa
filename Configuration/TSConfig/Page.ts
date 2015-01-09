@@ -14,6 +14,7 @@ mod.wizards.newContentElement.wizardItems.common {
 TCEMAIN {
 	permissions {
 		# Besitzergruppe (ID der Gruppe Page Access):
+		// TODO: muss noch durch Variablen gesteuert werden
 		groupid = 2
 		# Rechte Besitzer:
 		user = show, editcontent, edit, delete, new
@@ -29,15 +30,19 @@ mod.web_list {
 	enableClipBoard = activated
 	enableDisplayBigControlPanel = activated
 	enableLocalizationView = activated
-
-	// verstecke Elemente die im "new record wizard" neu angelegt werden könnten
-	deniedNewTables = tx_devlog,backend_layout,sys_domain,tx_rtehtmlarea_acronym,sys_template,tx_scheduler_task_group,sys_note,sys_file_collection,tx_beacl_acl
 }
 
 [TS][usergroup = 3]
 // Setzen der Benutzerrechte beim Anlegen von Seiten und Inhalt
 // TODO: muss noch durch Variablen gesteuert werden
 
+// Verstecken unerwünschter möglicher Inhaltselemente
+mod.web_list {
+
+	// verstecke Elemente die im "new record wizard" neu angelegt werden könnten
+	deniedNewTables = tx_devlog,backend_layout,sys_domain,tx_rtehtmlarea_acronym,sys_template,tx_scheduler_task_group,sys_note,sys_file_collection,tx_beacl_acl
+	hideTables = sys_domain,sys_template,tx_beacl_acl
+}
 
 // Verstecken unerwünschter Seiten- und Inhaltselemente
 TCEFORM {
