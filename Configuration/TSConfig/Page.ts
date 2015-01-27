@@ -1,16 +1,5 @@
 mod.SHARED.defaultLanguageFlag = dede
 
-// Audiocontentelement zu "new content element wizzard" hinzufügen
-mod.wizards.newContentElement.wizardItems.common {
-	elements.fluidcontentelement {
-		icon = gfx/c_wiz/multimedia.gif
-		title = Audioelment
-		description = Show Audio Content
-		tt_content_defValues.CType = textpic
-	}
-	show := addToList(fluidcontentelement)
-}
-
 TCEMAIN {
 	permissions {
 		# Besitzergruppe (ID der Gruppe Page Access):

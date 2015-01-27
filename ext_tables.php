@@ -13,29 +13,6 @@ if (!defined('TYPO3_MODE')) {
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
 		'<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $_EXTKEY . '/Configuration/TSConfig/Page.ts">'
 );
-/**
- * Register Custom Content Elements
- */
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Subugoe.'.$_EXTKEY,
-    'Fluidcontentelement',
-    'Audio content element'
-);
-
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Subugoe.'.$_EXTKEY,
-    'Audioelement',
-    'Audioelement'
-);
-
-
-/**
- * Prepare TCA for Custom Content Elements
- */
-\TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('tt_content');
-$TCA['tt_content']['types']['beipoa_fluidcontentelement']['showitem'] = $TCA['tt_content']['types']['media']['showitem'];
-$TCA['tt_content']['types']['beipoa_audioelement']['showitem'] = $TCA['tt_content']['types']['media']['showitem'];
-
 
 /**
  * Settings for divided flags
