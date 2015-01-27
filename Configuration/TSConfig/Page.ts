@@ -1,19 +1,9 @@
 mod.SHARED.defaultLanguageFlag = dede
 
-// Audiocontentelement zu "new content element wizzard" hinzufügen
-mod.wizards.newContentElement.wizardItems.common {
-	elements.fluidcontentelement {
-		icon = gfx/c_wiz/multimedia.gif
-		title = Audioelment
-		description = Show Audio Content
-		tt_content_defValues.CType = textpic
-	}
-	show := addToList(fluidcontentelement)
-}
-
 TCEMAIN {
 	permissions {
 		# Besitzergruppe (ID der Gruppe Page Access):
+		// TODO: muss noch durch Variablen gesteuert werden
 		groupid = 2
 		# Rechte Besitzer:
 		user = show, editcontent, edit, delete, new
@@ -29,15 +19,19 @@ mod.web_list {
 	enableClipBoard = activated
 	enableDisplayBigControlPanel = activated
 	enableLocalizationView = activated
-
-	// verstecke Elemente die im "new record wizard" neu angelegt werden könnten
-	deniedNewTables = tx_devlog,backend_layout,sys_domain,tx_rtehtmlarea_acronym,sys_template,tx_scheduler_task_group,sys_note,sys_file_collection,tx_beacl_acl
 }
 
-[TS][usergroup = {$ids.reducedRightsEditors}]
+[usergroup = 3]
 // Setzen der Benutzerrechte beim Anlegen von Seiten und Inhalt
 // TODO: muss noch durch Variablen gesteuert werden
 
+// Verstecken unerwünschter möglicher Inhaltselemente
+mod.web_list {
+
+	// verstecke Elemente die im "new record wizard" neu angelegt werden könnten
+	deniedNewTables = tx_devlog,backend_layout,sys_domain,tx_rtehtmlarea_acronym,sys_template,tx_scheduler_task_group,sys_note,sys_file_collection,tx_beacl_acl
+	hideTables = sys_domain,sys_template,tx_beacl_acl
+}
 
 // Verstecken unerwünschter Seiten- und Inhaltselemente
 TCEFORM {
@@ -49,14 +43,58 @@ TCEFORM {
 		description.disabled = 0
 		media.disabled = 0
 		author.disabled = 0
-		doktype.removeItems = spacer
+		#1 = Standard
+		#2 = Erweitert
+		#3 = Externe URL
+		#4 = Shortcut
+		#5 = Nicht im Menü
+		#6 = Backend Benutzer Bereich
+		#7 = Mount Seite
+		#199 = Abstand
+		#254 = Sysordner
+		#255 = Recycler
+		#--div-- = Trennlinie
+		doktype.removeItems = 6,4,7,3,254,199
 
+		// Seiteneigenschaften
+		// General
+		subtitle.disabled = 1
+		nav_title.disabled = 1
+		target.disabled = 1
+		// Access
+		fe_group.disabled = 1
+		extendToSubpages.disabled = 1
+		fe_login_mode.disabled = 1
+		// Metadata
+		abstract.disabled  = 1
+		author.disabled = 1
+		author_email.disabled = 1
+		lastUpdated.disabled = 1
+		// Appearance
+		backend_layout.disabled  = 1
+		backend_layout_next_level.disabled  = 1
+		content_from_pid.disabled = 1
+		// Behaviour
+		alias.disabled  = 1
+		url_scheme.disabled = 1
+		cache_timeout.disabled = 1
+		no_cache.disabled = 1
+		cache_tags.disabled  = 1
+		is_siteroot.disabled = 1
+		no_search.disabled = 1
+		editlock.disabled = 1
+		php_tree_stop.disabled = 1
+		module.disabled = 1
+		// Resources
+		media.disabled  = 1
+		storage_pid.disabled  = 1
+		TSconfig.disabled  = 1
 	}
 
 	tt_content {
 		// Unerwünschte Seitentypen ausblenden (sowohl im "new content element wizard" als auch im Menü)
 		// sollen text, image,table, filelist, sitemap(menu), plugin und eigene Elemente bleiben
-		CType.removeItems = header,textpic,bullets,media,shortcut,html,div,multimedia,mailform,login,search,tx_beacl_acl
+		CType.removeItems = header,textpic,bullets,media,shortcut,html,div,multimedia,mailform,login,search,tx_beacl_acl,uploads
 
 		// Unerwünschte Auswahlmöglichkeiten bei Inhaltselementen entfernen
 		header_layout.removeItems = 1,2,3,4,5
@@ -149,6 +187,13 @@ RTE.default {
 		pre,
 		section
 	)
+	# disable options in extra window to create links
+	buttons.link {
+		targetSelector.disabled = 1
+		popupSelector.disabled = 1
+		properties.class.allowedClasses := removeFromList(external-link,external-link-new-window,internal-link,internal-link-new-window,download,mail)
+	}
+
 }
 
-[global][/TS]
+[END]
