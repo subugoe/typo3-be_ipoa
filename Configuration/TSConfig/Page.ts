@@ -32,7 +32,7 @@ mod.web_list {
 	enableLocalizationView = activated
 }
 
-[TS][usergroup = 3]
+[usergroup = 3]
 // Setzen der Benutzerrechte beim Anlegen von Seiten und Inhalt
 // TODO: muss noch durch Variablen gesteuert werden
 
@@ -198,6 +198,13 @@ RTE.default {
 		pre,
 		section
 	)
+	# disable options in extra window to create links
+	buttons.link {
+		targetSelector.disabled = 1
+		popupSelector.disabled = 1
+		properties.class.allowedClasses := removeFromList(external-link,external-link-new-window,internal-link,internal-link-new-window,download,mail)
+	}
+
 }
 
-[global][/TS]
+[END]
