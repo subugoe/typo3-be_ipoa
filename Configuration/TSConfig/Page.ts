@@ -54,7 +54,18 @@ TCEFORM {
 		description.disabled = 0
 		media.disabled = 0
 		author.disabled = 0
-		doktype.removeItems = spacer
+		#1 = Standard
+		#2 = Erweitert
+		#3 = Externe URL
+		#4 = Shortcut
+		#5 = Nicht im Menü
+		#6 = Backend Benutzer Bereich
+		#7 = Mount Seite
+		#199 = Abstand
+		#254 = Sysordner
+		#255 = Recycler
+		#--div-- = Trennlinie
+		doktype.removeItems = 6,4,7,3,254,199
 
 		// Seiteneigenschaften
 		// General
