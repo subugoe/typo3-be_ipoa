@@ -21,8 +21,9 @@ mod.web_list {
 	enableLocalizationView = activated
 }
 
-[usergroup = 3]
+[usergroup = 3] OR [usergroup = 4]
 // Setzen der Benutzerrechte beim Anlegen von Seiten und Inhalt
+	// 3: Advanced Editing, 4: OA-Tage
 // TODO: muss noch durch Variablen gesteuert werden
 
 // Verstecken unerwünschter möglicher Inhaltselemente
