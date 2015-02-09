@@ -99,7 +99,7 @@ TCEFORM {
 		// Unerwünschte Auswahlmöglichkeiten bei Inhaltselementen entfernen
 		header_layout.removeItems = 1,2,3,4,5
 		header_position.disabled = 1
-		colPos.disabled = 1
+		colPos.disabled = 0
 		header_link.disabled = 1
 		date.disabled = 1
 		linkToTop.disabled = 1
