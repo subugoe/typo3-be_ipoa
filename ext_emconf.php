@@ -11,17 +11,17 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array (
-    'title' => 'Backend IPOA Backend Content Elements',
+    'title' => 'Backend IPOA Backend Rights Management',
     'description' => '',
     'category' => 'backend',
     'shy' => 1,
-    'version' => '0.0.2',
+    'version' => '0.1.0',
     'dependencies' => '',
     'conflicts' => '',
     'priority' => '',
     'loadOrder' => '',
     'module' => '',
-    'state' => 'alpha',
+    'state' => 'beta',
     'uploadfolder' => 0,
     'createDirs' => '',
     'modify_tables' => '',
