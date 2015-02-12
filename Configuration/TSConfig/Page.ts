@@ -55,7 +55,7 @@ TCEFORM {
 		#254 = Sysordner
 		#255 = Recycler
 		#--div-- = Trennlinie
-		doktype.removeItems = 6,4,7,3,254,199
+		doktype.removeItems = 6,4,7,3,254,199,255
 
 		// Seiteneigenschaften
 		// General
