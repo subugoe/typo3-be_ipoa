@@ -21,8 +21,9 @@ mod.web_list {
 	enableLocalizationView = activated
 }
 
-[usergroup = 3]
+[usergroup = 3] OR [usergroup = 4]
 // Setzen der Benutzerrechte beim Anlegen von Seiten und Inhalt
+	// 3: Advanced Editing, 4: OA-Tage
 // TODO: muss noch durch Variablen gesteuert werden
 
 // Verstecken unerwünschter möglicher Inhaltselemente
@@ -54,7 +55,7 @@ TCEFORM {
 		#254 = Sysordner
 		#255 = Recycler
 		#--div-- = Trennlinie
-		doktype.removeItems = 6,4,7,3,254,199
+		doktype.removeItems = 6,4,7,3,254,199,255
 
 		// Seiteneigenschaften
 		// General
@@ -99,7 +100,7 @@ TCEFORM {
 		// Unerwünschte Auswahlmöglichkeiten bei Inhaltselementen entfernen
 		header_layout.removeItems = 1,2,3,4,5
 		header_position.disabled = 1
-		colPos.disabled = 1
+		colPos.disabled = 0
 		header_link.disabled = 1
 		date.disabled = 1
 		linkToTop.disabled = 1
