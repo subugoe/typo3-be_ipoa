@@ -26,6 +26,9 @@ mod.web_list {
 	// 3: Advanced Editing, 4: OA-Tage
 	// TODO: muss noch durch Variablen gesteuert werden, falls möglich
 
+	// Verstecken des Moduls "Admin Tools"
+	options.hideModules = tools
+
 	// Verstecken unerwünschter möglicher Inhaltselemente
 	mod.web_list {
 
