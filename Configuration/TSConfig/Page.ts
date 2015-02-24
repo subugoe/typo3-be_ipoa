@@ -133,6 +133,8 @@ mod.web_list {
 				acctables_headerpos.disabled = 1
 				acctables_tableclass.disabled = 1
 			}
+			// menu, remove items
+			#menu_type.removeItems = 3,7,categorized_content
 		}
 	}
 	// steht in der localconf zum Enternen des Link zum direkten Upload im Contentelement:
@@ -196,11 +198,14 @@ mod.web_list {
 			targetSelector.disabled = 1
 			popupSelector.disabled = 1
 			properties.class.allowedClasses := removeFromList(external-link,external-link-new-window,internal-link,internal-link-new-window,download,mail)
+			# remove folder tab in link wizard
+			options.removeItems = folder
 		}
 	}
 
 	# Hide possibility to upload files in Element Browser
 	options.folderTree.uploadFieldsInLinkBrowser = 0
 
-
 [END]
+
+
