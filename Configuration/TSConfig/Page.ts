@@ -21,6 +21,14 @@ mod.web_list {
 	enableLocalizationView = activated
 }
 
+# global instructions for RTE, even for admins
+# show and/or remove more unwanted tags (partially done in rtehtmlarea/res/typical/pageTSConfig.txt)
+RTE.default {
+	removeTags = span, pre
+	# remove inline style attributes
+	proc.entryHTMLparser_db.tags.p.fixAttrib.style.unset = 1
+}
+
 [usergroup = 3] OR [usergroup = 4]
 	// Setzen der Benutzerrechte beim Anlegen von Seiten und Inhalt
 	// 3: Advanced Editing, 4: OA-Tage
@@ -178,6 +186,7 @@ mod.web_list {
 		underline,
 		strikethrough
 		)
+		# Remove items in format list
 		buttons.formatblock.removeItems (
 		address,
 		article,
@@ -207,5 +216,3 @@ mod.web_list {
 	options.folderTree.uploadFieldsInLinkBrowser = 0
 
 [END]
-
-
