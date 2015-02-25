@@ -21,6 +21,14 @@ mod.web_list {
 	enableLocalizationView = activated
 }
 
+# global instructions for RTE, even for admins
+# show and/or remove more unwanted tags (partially done in rtehtmlarea/res/typical/pageTSConfig.txt)
+RTE.default {
+	removeTags = span, pre
+	# remove inline style attributes
+	proc.entryHTMLparser_db.tags.p.fixAttrib.style.unset = 1
+}
+
 [usergroup = 3] OR [usergroup = 4]
 	// Setzen der Benutzerrechte beim Anlegen von Seiten und Inhalt
 	// 3: Advanced Editing, 4: OA-Tage
@@ -133,6 +141,8 @@ mod.web_list {
 				acctables_headerpos.disabled = 1
 				acctables_tableclass.disabled = 1
 			}
+			// menu, remove items
+			#menu_type.removeItems = 3,7,categorized_content
 		}
 	}
 	// steht in der localconf zum Enternen des Link zum direkten Upload im Contentelement:
@@ -176,6 +186,7 @@ mod.web_list {
 		underline,
 		strikethrough
 		)
+		# Remove items in format list
 		buttons.formatblock.removeItems (
 		address,
 		article,
@@ -196,11 +207,12 @@ mod.web_list {
 			targetSelector.disabled = 1
 			popupSelector.disabled = 1
 			properties.class.allowedClasses := removeFromList(external-link,external-link-new-window,internal-link,internal-link-new-window,download,mail)
+			# remove folder tab in link wizard
+			options.removeItems = folder
 		}
 	}
 
 	# Hide possibility to upload files in Element Browser
 	options.folderTree.uploadFieldsInLinkBrowser = 0
-
 
 [END]
