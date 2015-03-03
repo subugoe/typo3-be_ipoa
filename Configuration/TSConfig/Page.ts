@@ -108,8 +108,11 @@ RTE.default {
 			// sollen text, image,table, filelist, sitemap(menu), plugin und eigene Elemente bleiben
 			CType.removeItems = header,textpic,bullets,media,shortcut,html,div,multimedia,mailform,login,search,tx_beacl_acl,uploads
 
-			// Unerwünschte Auswahlmöglichkeiten bei Inhaltselementen entfernen
-			header_layout.removeItems = 1,2,3,4,5
+			// Unerwünschte Auswahlmöglichkeiten bei Inhaltselementen entfernen oder ändern
+			header_layout.altLabels.0 = Standard
+			header_layout.altLabels.1 = OA-Tage Untertitel
+			header_layout.altLabels.100 = Versteckt
+			header_layout.removeItems = 2,3,4,5
 			header_position.disabled = 1
 			colPos.disabled = 0
 			header_link.disabled = 1
