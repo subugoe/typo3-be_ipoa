@@ -104,12 +104,11 @@ RTE.default {
 		}
 
 		tt_content {
-			// Unerwünschte Seitentypen ausblenden (sowohl im "new content element wizard" als auch im Menü)
-			// sollen text, image,table, filelist, sitemap(menu), plugin und eigene Elemente bleiben
-			CType.removeItems = header,textpic,bullets,media,shortcut,html,div,multimedia,mailform,login,search,tx_beacl_acl,uploads
-
-			// Unerwünschte Auswahlmöglichkeiten bei Inhaltselementen entfernen
-			header_layout.removeItems = 1,2,3,4,5
+			// Unerwünschte Auswahlmöglichkeiten bei Inhaltselementen entfernen oder ändern
+			header_layout.altLabels.1 = Standard
+			header_layout.altLabels.2 = OA-Tage Untertitel
+			header_layout.altLabels.100 = Versteckt
+			header_layout.removeItems = 0,3,4,5
 			header_position.disabled = 1
 			colPos.disabled = 0
 			header_link.disabled = 1
@@ -216,3 +215,14 @@ RTE.default {
 	options.folderTree.uploadFieldsInLinkBrowser = 0
 
 [END]
+
+
+// remove unwanted content elements for editors
+[usergroup = 3] || [usergroup = 4]
+	TCEFORM.tt_content.CType.removeItems = textpic,header,bullets,media,shortcut,html,div,multimedia,mailform,login,search,tx_beacl_acl,uploads
+[end]
+[usergroup = 4]
+	// for oatage editors allow also textpic
+	// so that they can create people content
+	TCEFORM.tt_content.CType.removeItems := removeFromList(textpic)
+[end]
