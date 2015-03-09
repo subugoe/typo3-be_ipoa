@@ -232,4 +232,5 @@ RTE.default.FE {
   proc.entryHTMLparser_db.tags.img >
   showButtons < RTE.default.showButtons
 }
-RTE.buttons.image < RTE.default.buttons.image
+
+RTE.default.buttons.image.options.removeItems = magic,dragdrop
