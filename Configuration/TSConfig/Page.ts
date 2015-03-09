@@ -219,27 +219,36 @@ RTE.default {
 
 [END]
 
-// Images im RTE erlauben
-// laut https://medianetix.wordpress.com/2008/05/30/typo3-rte-bilder-im-editor-aktivieren/
-RTE.default.proc {
-	allowTag := addToList(img)
-	entryHTMLparser_db.tags.img >
-	allowTagsOutside := addToList(img)
-}
-RTE.default.FE {
-  proc.allowTags := RTE.default.proc.allowTags
-  proc.allowTagsOutside < RTE.default.proc.allowTagsOutside
-  proc.entryHTMLparser_db.tags.img >
-  showButtons < RTE.default.showButtons
-}
-// aber nur für OATage
+// Spezielle Einstellungen für die OA Tage
 [PIDinRootline = 609]
+	// Images im RTE erlauben
+	RTE.default.proc {
+		allowTag := addToList(img)
+		entryHTMLparser_db.tags.img >
+		allowTagsOutside := addToList(img)
+	}
+	RTE.default.FE {
+    proc.allowTags := RTE.default.proc.allowTags
+     proc.allowTagsOutside < RTE.default.proc.allowTagsOutside
+     proc.entryHTMLparser_db.tags.img >
+     showButtons < RTE.default.showButtons
+	}
 	RTE.default.showButtons := addToList(image)
 	RTE.default.hideButtons := removeFromList(image)
+
+	//  Anpassen des Image Wizards vom RTE aus
+	RTE.default.buttons.image.options.removeItems = magic,dragdrop
+	// ,,, und des vom Image Wizard erzeugten Codes
+	RTE.default.proc.entryHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
+	RTE.default.proc.exitHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
+
+	RTE.default.buttons.formatblock {
+		addItems = odc
+		items.odc {
+			label = Ausklappbarer Content
+			tagName = blockquote
+			addClass = on-demand__content
+		}
+	}
 [else]
 [end]
-
-
-RTE.default.buttons.image.options.removeItems = magic,dragdrop
-RTE.default.proc.entryHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
-RTE.default.proc.exitHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
