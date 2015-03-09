@@ -24,7 +24,7 @@ mod.web_list {
 # global instructions for RTE, even for admins
 # show and/or remove more unwanted tags (partially done in rtehtmlarea/res/typical/pageTSConfig.txt)
 RTE.default {
-	removeTags = span,pre,div
+	removeTags = span,pre,div,h1,h5,h6
 	# remove inline style attributes
 	proc.entryHTMLparser_db.tags.p.fixAttrib.style.unset = 1
 }
@@ -157,51 +157,52 @@ RTE.default {
 	// Configuration RTE
 	RTE.default {
 		hideButtons (
-		class,
-		blockstylelabel,
-		blockstyle,
-		textstylelabel,
-		textstyle,
-		indent,
-		outdent,
-		textindicator,
-		table,
-		toggleborders,
-		tableproperties,
-		chMode,
-		rowproperties,
-		rowinsertabove,
-		rowinsertunder,
-		rowdelete,
-		rowsplit,
-		columninsertbefore,
-		columninsertafter,
-		columndelete,
-		columnsplit,
-		cellproperties,
-		cellinsertbefore,
-		cellinsertafter,
-		celldelete,
-		cellsplit,
-		cellmerge,
-		underline,
-		strikethrough
+			image,
+			class,
+			blockstylelabel,
+			blockstyle,
+			textstylelabel,
+			textstyle,
+			indent,
+			outdent,
+			textindicator,
+			table,
+			toggleborders,
+			tableproperties,
+			chMode,
+			rowproperties,
+			rowinsertabove,
+			rowinsertunder,
+			rowdelete,
+			rowsplit,
+			columninsertbefore,
+			columninsertafter,
+			columndelete,
+			columnsplit,
+			cellproperties,
+			cellinsertbefore,
+			cellinsertafter,
+			celldelete,
+			cellsplit,
+			cellmerge,
+			underline,
+			strikethrough
 		)
 		# Remove items in format list
 		buttons.formatblock.removeItems (
-		address,
-		article,
-		aside,
-		div,
-		footer,
-		nav,
-		header,
-		h1,
-		h2,
-		h5,
-		h6,
-		pre,
-		section
+			address,
+			article,
+			aside,
+			div,
+			footer,
+			nav,
+			header,
+			h1,
+			h2,
+			h5,
+			h6,
+			pre,
+			section
 		)
 		# disable options in extra window to create links
 		buttons.link {
@@ -221,16 +222,24 @@ RTE.default {
 // Images im RTE erlauben
 // laut https://medianetix.wordpress.com/2008/05/30/typo3-rte-bilder-im-editor-aktivieren/
 RTE.default.proc {
-  allowTag := addToList(img)
-  allowTagsOutside := addToList(img)
-  entryHTMLparser_db.tags.img >
+	allowTag := addToList(img)
+	entryHTMLparser_db.tags.img >
+	allowTagsOutside := addToList(img)
 }
-RTE.default.showButtons := addToList(image)
 RTE.default.FE {
   proc.allowTags := RTE.default.proc.allowTags
   proc.allowTagsOutside < RTE.default.proc.allowTagsOutside
   proc.entryHTMLparser_db.tags.img >
   showButtons < RTE.default.showButtons
 }
+// aber nur für OATage
+[PIDinRootline = 609]
+	RTE.default.showButtons := addToList(image)
+	RTE.default.hideButtons := removeFromList(image)
+[else]
+[end]
+
 
 RTE.default.buttons.image.options.removeItems = magic,dragdrop
+RTE.default.proc.entryHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
+RTE.default.proc.exitHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
