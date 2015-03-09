@@ -24,7 +24,7 @@ mod.web_list {
 # global instructions for RTE, even for admins
 # show and/or remove more unwanted tags (partially done in rtehtmlarea/res/typical/pageTSConfig.txt)
 RTE.default {
-	removeTags = span, pre
+	removeTags = span,pre,div
 	# remove inline style attributes
 	proc.entryHTMLparser_db.tags.p.fixAttrib.style.unset = 1
 }
@@ -105,6 +105,8 @@ RTE.default {
 
 		tt_content {
 			// Unerwünschte Auswahlmöglichkeiten bei Inhaltselementen entfernen oder ändern
+			CType.removeItems = header,textpic,bullets,media,shortcut,html,div,multimedia,mailform,login,search,tx_beacl_acl,uploads
+
 			header_layout.altLabels.1 = Standard
 			header_layout.altLabels.2 = OA-Tage Untertitel
 			header_layout.altLabels.100 = Versteckt
@@ -216,13 +218,18 @@ RTE.default {
 
 [END]
 
-
-// remove unwanted content elements for editors
-[usergroup = 3] || [usergroup = 4]
-	TCEFORM.tt_content.CType.removeItems = textpic,header,bullets,media,shortcut,html,div,multimedia,mailform,login,search,tx_beacl_acl,uploads
-[end]
-[usergroup = 4]
-	// for oatage editors allow also textpic
-	// so that they can create people content
-	TCEFORM.tt_content.CType.removeItems := removeFromList(textpic)
-[end]
+// Images im RTE erlauben
+// laut https://medianetix.wordpress.com/2008/05/30/typo3-rte-bilder-im-editor-aktivieren/
+RTE.default.proc {
+  allowTag := addToList(img)
+  allowTagsOutside := addToList(img)
+  entryHTMLparser_db.tags.img >
+}
+RTE.default.showButtons := addToList(image)
+RTE.default.FE {
+  proc.allowTags := RTE.default.proc.allowTags
+  proc.allowTagsOutside < RTE.default.proc.allowTagsOutside
+  proc.entryHTMLparser_db.tags.img >
+  showButtons < RTE.default.showButtons
+}
+RTE.buttons.image < RTE.default.buttons.image
