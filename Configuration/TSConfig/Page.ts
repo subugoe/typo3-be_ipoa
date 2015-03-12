@@ -24,11 +24,13 @@ mod.web_list {
 # global instructions for RTE, even for admins
 # show and/or remove more unwanted tags (partially done in rtehtmlarea/res/typical/pageTSConfig.txt)
 RTE.default {
-	removeTags = span, pre
+	removeTags = span,pre,div,h1,h5,h6
 	# remove inline style attributes
 	proc.entryHTMLparser_db.tags.p.fixAttrib.style.unset = 1
 }
 
+//////////////////////////////////////////////////////
+// Einstellungen für Editoren
 [usergroup = 3] OR [usergroup = 4]
 	// Setzen der Benutzerrechte beim Anlegen von Seiten und Inhalt
 	// 3: Advanced Editing, 4: OA-Tage
@@ -105,6 +107,8 @@ RTE.default {
 
 		tt_content {
 			// Unerwünschte Auswahlmöglichkeiten bei Inhaltselementen entfernen oder ändern
+			CType.removeItems = header,textpic,bullets,media,shortcut,html,div,multimedia,mailform,login,search,tx_beacl_acl,uploads
+
 			header_layout.altLabels.1 = Standard
 			header_layout.altLabels.2 = OA-Tage Untertitel
 			header_layout.altLabels.100 = Versteckt
@@ -155,52 +159,61 @@ RTE.default {
 	// Configuration RTE
 	RTE.default {
 		hideButtons (
-		class,
-		blockstylelabel,
-		blockstyle,
-		textstylelabel,
-		textstyle,
-		indent,
-		outdent,
-		textindicator,
-		table,
-		toggleborders,
-		tableproperties,
-		chMode,
-		rowproperties,
-		rowinsertabove,
-		rowinsertunder,
-		rowdelete,
-		rowsplit,
-		columninsertbefore,
-		columninsertafter,
-		columndelete,
-		columnsplit,
-		cellproperties,
-		cellinsertbefore,
-		cellinsertafter,
-		celldelete,
-		cellsplit,
-		cellmerge,
-		underline,
-		strikethrough
+			image,
+			class,
+			blockstylelabel,
+			blockstyle,
+			textstylelabel,
+			textstyle,
+			indent,
+			outdent,
+			textindicator,
+			table,
+			toggleborders,
+			tableproperties,
+			chMode,
+			rowproperties,
+			rowinsertabove,
+			rowinsertunder,
+			rowdelete,
+			rowsplit,
+			columninsertbefore,
+			columninsertafter,
+			columndelete,
+			columnsplit,
+			cellproperties,
+			cellinsertbefore,
+			cellinsertafter,
+			celldelete,
+			cellsplit,
+			cellmerge,
+			underline,
+			strikethrough
 		)
 		# Remove items in format list
-		buttons.formatblock.removeItems (
-		address,
-		article,
-		aside,
-		div,
-		footer,
-		nav,
-		header,
-		h1,
-		h2,
-		h5,
-		h6,
-		pre,
-		section
-		)
+		buttons.formatblock {
+			removeItems (
+				address,
+				article,
+				aside,
+				div,
+				footer,
+				nav,
+				header,
+				p,
+				h1,
+				h2,
+				h5,
+				h6,
+				pre,
+				section
+			)
+			items {
+				h3.label = Überschrift 3
+				h4.label = Überschrift 4
+				blockquote.label = Einrückung
+			}
+		}
 		# disable options in extra window to create links
 		buttons.link {
 			targetSelector.disabled = 1
@@ -216,13 +229,74 @@ RTE.default {
 
 [END]
 
+//////////////////////////////////////////////////////
+// Spezielle Einstellungen für die OA Tage
+[PIDinRootline = 609]
 
-// remove unwanted content elements for editors
-[usergroup = 3] || [usergroup = 4]
-	TCEFORM.tt_content.CType.removeItems = textpic,header,bullets,media,shortcut,html,div,multimedia,mailform,login,search,tx_beacl_acl,uploads
-[end]
-[usergroup = 4]
-	// for oatage editors allow also textpic
-	// so that they can create people content
-	TCEFORM.tt_content.CType.removeItems := removeFromList(textpic)
+	// Images im RTE erlauben
+	RTE.default.proc {
+		allowTag := addToList(img)
+		entryHTMLparser_db.tags.img >
+		allowTagsOutside := addToList(img)
+	}
+	RTE.default.FE {
+		proc.allowTags := RTE.default.proc.allowTags
+		proc.allowTagsOutside < RTE.default.proc.allowTagsOutside
+		proc.entryHTMLparser_db.tags.img >
+		showButtons < RTE.default.showButtons
+	}
+	RTE.default.showButtons := addToList(image)
+	RTE.default.hideButtons := removeFromList(image)
+
+	//  Anpassen des Image Wizards vom RTE aus
+	RTE.default.buttons.image.options.removeItems = magic,dragdrop
+	// ,,, und des vom Image Wizard erzeugten Codes (alles andere wird rausgeschmissen)
+	RTE.default.proc.entryHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
+	RTE.default.proc.exitHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
+
+	// Zur Verfügung stellen von Auszeichnungen für Aufklappcontent und -link
+	RTE.default.contentCSS = typo3conf/ext/be_ipoa/Resources/Public/Css/rte.css
+	RTE.classes := addToList(on-demand__content)
+	RTE.default.proc.allowedClasses := addToList(on-demand__content)
+	RTE.default.buttons.formatblock {
+		addItems = on-demand__content
+		items.on-demand__content {
+			label = Ausklappbarer Content
+			tagName = blockquote
+			addClass = on-demand__content
+		}
+	}
+	RTE.classesAnchor {
+		internalLink {
+			class = internal-link
+			type = page
+			image >
+			altText >
+			titleText = Opens internal link in current window
+		}
+		on-demand__link {
+			class = on-demand__link
+			type = page
+			image >
+			altText >
+			titleText = Shows previously invisible content
+		}
+	}
+
+	// Der Link zum Aufklappcontent. Er wird erzeugt durch einen Page link
+	// dem automatisch die Klasse "on-demand__link" mitgegeben wird
+	RTE.classes := addToList(on-demand__link)
+	RTE.default.proc.allowedClasses := addToList(on-demand__link)
+
+	RTE.classes.on-demand__link {
+		name = Aufklapplink
+		value = color: #a80f4f
+	}
+	RTE.default.buttons.link {
+		properties.class.allowedClasses = on-demand__link,internal-link
+		page.properties.class.default = on-demand__link
+		page.properties.class.required = 1
+	}
+
+[else]
 [end]
