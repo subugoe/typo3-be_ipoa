@@ -240,10 +240,10 @@ RTE.default {
 		allowTagsOutside := addToList(img)
 	}
 	RTE.default.FE {
-    proc.allowTags := RTE.default.proc.allowTags
-     proc.allowTagsOutside < RTE.default.proc.allowTagsOutside
-     proc.entryHTMLparser_db.tags.img >
-     showButtons < RTE.default.showButtons
+		proc.allowTags := RTE.default.proc.allowTags
+		proc.allowTagsOutside < RTE.default.proc.allowTagsOutside
+		proc.entryHTMLparser_db.tags.img >
+		showButtons < RTE.default.showButtons
 	}
 	RTE.default.showButtons := addToList(image)
 	RTE.default.hideButtons := removeFromList(image)
@@ -256,24 +256,44 @@ RTE.default {
 
 	// Zur Verfügung stellen von Auszeichnungen für Aufklappcontent und -link
 	RTE.default.contentCSS = typo3conf/ext/be_ipoa/Resources/Public/Css/rte.css
+	RTE.classes := addToList(on-demand__content)
+	RTE.default.proc.allowedClasses := addToList(on-demand__content)
 	RTE.default.buttons.formatblock {
-		addItems = odc
-		items.odc {
+		addItems = on-demand__content
+		items.on-demand__content {
 			label = Ausklappbarer Content
 			tagName = blockquote
 			addClass = on-demand__content
 		}
 	}
+	RTE.classesAnchor {
+		internalLink {
+			class = internal-link
+			type = page
+			image >
+			altText >
+			titleText = Opens internal link in current window
+		}
+		on-demand__link {
+			class = on-demand__link
+			type = page
+			image >
+			altText >
+			titleText = Shows previously invisible content
+		}
+	}
+
 	// Der Link zum Aufklappcontent. Er wird erzeugt durch einen Page link
 	// dem automatisch die Klasse "on-demand__link" mitgegeben wird
 	RTE.classes := addToList(on-demand__link)
 	RTE.default.proc.allowedClasses := addToList(on-demand__link)
+
 	RTE.classes.on-demand__link {
 		name = Aufklapplink
 		value = color: #a80f4f
 	}
 	RTE.default.buttons.link {
-		properties.class.allowedClasses = on-demand__link
+		properties.class.allowedClasses = on-demand__link,internal-link
 		page.properties.class.default = on-demand__link
 		page.properties.class.required = 1
 	}

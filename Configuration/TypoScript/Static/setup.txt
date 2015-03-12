@@ -1,0 +1,1 @@
+<INCLUDE_TYPOSCRIPT: source="DIR:EXT:be_ipoa/Configuration/TypoScript/Elements/" extensions="ts">
