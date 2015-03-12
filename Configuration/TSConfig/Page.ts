@@ -29,6 +29,8 @@ RTE.default {
 	proc.entryHTMLparser_db.tags.p.fixAttrib.style.unset = 1
 }
 
+//////////////////////////////////////////////////////
+// Einstellungen für Editoren
 [usergroup = 3] OR [usergroup = 4]
 	// Setzen der Benutzerrechte beim Anlegen von Seiten und Inhalt
 	// 3: Advanced Editing, 4: OA-Tage
@@ -189,21 +191,29 @@ RTE.default {
 			strikethrough
 		)
 		# Remove items in format list
-		buttons.formatblock.removeItems (
-			address,
-			article,
-			aside,
-			div,
-			footer,
-			nav,
-			header,
-			h1,
-			h2,
-			h5,
-			h6,
-			pre,
-			section
-		)
+		buttons.formatblock {
+			removeItems (
+				address,
+				article,
+				aside,
+				div,
+				footer,
+				nav,
+				header,
+				p,
+				h1,
+				h2,
+				h5,
+				h6,
+				pre,
+				section
+			)
+			items {
+				h3.label = Überschrift 3
+				h4.label = Überschrift 4
+				blockquote.label = Einrückung
+			}
+		}
 		# disable options in extra window to create links
 		buttons.link {
 			targetSelector.disabled = 1
@@ -219,8 +229,10 @@ RTE.default {
 
 [END]
 
+//////////////////////////////////////////////////////
 // Spezielle Einstellungen für die OA Tage
 [PIDinRootline = 609]
+
 	// Images im RTE erlauben
 	RTE.default.proc {
 		allowTag := addToList(img)
@@ -238,10 +250,12 @@ RTE.default {
 
 	//  Anpassen des Image Wizards vom RTE aus
 	RTE.default.buttons.image.options.removeItems = magic,dragdrop
-	// ,,, und des vom Image Wizard erzeugten Codes
+	// ,,, und des vom Image Wizard erzeugten Codes (alles andere wird rausgeschmissen)
 	RTE.default.proc.entryHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
 	RTE.default.proc.exitHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
 
+	// Zur Verfügung stellen von Auszeichnungen für Aufklappcontent und -link
+	RTE.default.contentCSS = typo3conf/ext/be_ipoa/Resources/Public/Css/rte.css
 	RTE.default.buttons.formatblock {
 		addItems = odc
 		items.odc {
@@ -250,5 +264,19 @@ RTE.default {
 			addClass = on-demand__content
 		}
 	}
+	// Der Link zum Aufklappcontent. Er wird erzeugt durch einen Page link
+	// dem automatisch die Klasse "on-demand__link" mitgegeben wird
+	RTE.classes := addToList(on-demand__link)
+	RTE.default.proc.allowedClasses := addToList(on-demand__link)
+	RTE.classes.on-demand__link {
+		name = Aufklapplink
+		value = color: #a80f4f
+	}
+	RTE.default.buttons.link {
+		properties.class.allowedClasses = on-demand__link
+		page.properties.class.default = on-demand__link
+		page.properties.class.required = 1
+	}
+
 [else]
 [end]
