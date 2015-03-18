@@ -250,9 +250,10 @@ RTE.default {
 
 	//  Anpassen des Image Wizards vom RTE aus
 	RTE.default.buttons.image.options.removeItems = magic,dragdrop
+	RTE.default.buttons.image.properties.class.default = oadays__image
 	// ,,, und des vom Image Wizard erzeugten Codes (alles andere wird rausgeschmissen)
-	RTE.default.proc.entryHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
-	RTE.default.proc.exitHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description
+	RTE.default.proc.entryHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description,class
+	RTE.default.proc.exitHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description,class
 
 	// Zur Verfügung stellen von Auszeichnungen für Aufklappcontent und -link
 	RTE.default.contentCSS = typo3conf/ext/be_ipoa/Resources/Public/Css/rte.css
