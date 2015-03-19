@@ -111,8 +111,7 @@ RTE.default {
 
 			header_layout.altLabels.1 = Standard
 			header_layout.altLabels.2 = OA-Tage Untertitel
-			header_layout.altLabels.100 = Versteckt
-			header_layout.removeItems = 0,3,4,5
+			header_layout.removeItems = 0,3,4,5,100
 			header_position.disabled = 1
 			colPos.disabled = 0
 			header_link.disabled = 1
