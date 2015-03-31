@@ -26,7 +26,14 @@ mod.web_list {
 RTE.default {
 	removeTags = pre,div,h1,h5,h6
 	# remove inline style attributes
-	proc.entryHTMLparser_db.tags.p.fixAttrib.style.unset = 1
+	proc.entryHTMLparser_db.tags {
+		p.fixAttrib.style.unset = 1
+		span.fixAttrib.style.unset = 1
+		ul.fixAttrib.style.unset = 1
+		li.fixAttrib.style.unset = 1
+		h2.fixAttrib.style.unset = 1
+
+	}
 }
 
 //////////////////////////////////////////////////////
