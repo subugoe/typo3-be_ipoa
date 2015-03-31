@@ -157,6 +157,7 @@ RTE.default {
 
 	// Configuration RTE
 	RTE.default {
+		toolbarOrder = formatblock, textstylelabel, bold, italic, subscript, superscript, orderedlist, unorderedlist, insertcharacter, link, findreplace, removeformat, undo, redo, showhelp
 		hideButtons (
 			image,
 			class,
@@ -249,6 +250,9 @@ RTE.default {
 	RTE.default.proc.exitHTMLparser_db.tags.img.allowedAttribs = src,alt,title,description,class
 
 	// Zur Verfügung stellen von Auszeichnungen für Aufklappcontents und -links
+	RTE.default.hideButtons := removeFromList(textstylelabel, textstyle)
+	RTE.default.showButtons := addToList(textstylelabel, textstyle)
+	RTE.default.toolbarOrder = formatblock, textstylelabel, textstyle, linebreak, bold, italic, subscript, superscript, orderedlist, unorderedlist, insertcharacter, link, image, findreplace, removeformat, undo, redo, showhelp
 	RTE.default.contentCSS = typo3conf/ext/be_ipoa/Resources/Public/Css/rte.css
 	// Content
 	RTE.default.proc.allowedClasses := addToList(on-demand__content)
