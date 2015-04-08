@@ -32,7 +32,7 @@ RTE.default {
 		ul.fixAttrib.style.unset = 1
 		li.fixAttrib.style.unset = 1
 		h2.fixAttrib.style.unset = 1
-
+		br.fixAttrib.style.unset = 1
 	}
 }
 
