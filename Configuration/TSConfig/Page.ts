@@ -26,7 +26,14 @@ mod.web_list {
 RTE.default {
 	removeTags = pre,div,h1,h5,h6
 	# remove inline style attributes
-	proc.entryHTMLparser_db.tags.p.fixAttrib.style.unset = 1
+	proc.entryHTMLparser_db.tags {
+		p.fixAttrib.style.unset = 1
+		span.fixAttrib.style.unset = 1
+		ul.fixAttrib.style.unset = 1
+		li.fixAttrib.style.unset = 1
+		h2.fixAttrib.style.unset = 1
+		br.fixAttrib.style.unset = 1
+	}
 }
 
 //////////////////////////////////////////////////////
@@ -252,7 +259,6 @@ RTE.default {
 	// Zur Verfügung stellen von Auszeichnungen für Aufklappcontents und -links
 	RTE.default.hideButtons := removeFromList(textstylelabel, textstyle)
 	RTE.default.showButtons := addToList(textstylelabel, textstyle)
-	RTE.default.toolbarOrder = formatblock, textstylelabel, textstyle, linebreak, bold, italic, subscript, superscript, orderedlist, unorderedlist, insertcharacter, link, image, findreplace, removeformat, undo, redo, showhelp
 	RTE.default.contentCSS = typo3conf/ext/be_ipoa/Resources/Public/Css/rte.css
 	// Content
 	RTE.default.proc.allowedClasses := addToList(on-demand__content)
@@ -278,5 +284,11 @@ RTE.default {
 	# ohne die folgende Zeile wird das Span beim Speichern entfernt
 	RTE.config.tt_content.bodytext.proc.allowedClasses := addToList(on-demand__link)
 
-[else]
+[end]
+
+
+[PIDinRootline = 609] && [usergroup = 3] OR [usergroup = 4]
+
+	RTE.default.toolbarOrder = formatblock, textstylelabel, textstyle, linebreak, bold, italic, subscript, superscript, orderedlist, unorderedlist, insertcharacter, link, image, findreplace, removeformat, undo, redo, showhelp
+
 [end]
