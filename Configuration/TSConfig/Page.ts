@@ -292,3 +292,5 @@ RTE.default {
 	RTE.default.toolbarOrder = formatblock, textstylelabel, textstyle, linebreak, bold, italic, subscript, superscript, orderedlist, unorderedlist, insertcharacter, link, image, findreplace, removeformat, undo, redo, showhelp
 
 [end]
+RTE.default.removeTags = table, tbody, td, tr
+RTE.default.keepNonMatcheTags = protect
