@@ -92,6 +92,7 @@ RTE.default {
 			author_email.disabled = 1
 			lastUpdated.disabled = 1
 			// Appearance
+			layout.disabled = 1
 			backend_layout.disabled = 1
 			backend_layout_next_level.disabled = 1
 			content_from_pid.disabled = 1
