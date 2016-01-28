@@ -36,6 +36,15 @@ RTE.default {
 	}
 }
 
+# News Extension:
+# durch das überschriebene Template sind einige Einstellungen im Backend sinnlos geworden.
+# die "Items per Page" und "Hide the Pagination" geben keinen Sinn, da es bei uns gar keine
+# Paginierung mehr gibt weil wir sie aus dem Fluid herausgeschrieben haben.
+TCEFORM.tt_content.pi_flexform.news_pi1.additional {
+	settings\.list\.paginate\.itemsPerPage.disabled = 1
+	settings\.hidePagination.disabled = 1
+}
+
 //////////////////////////////////////////////////////
 // Einstellungen für Editoren
 [usergroup = 3] OR [usergroup = 4]
