@@ -9,12 +9,6 @@
         "issues": "https://github.com/subugoe/typo3-be_ipoa/issues"
     },
     "replace": {
-        "tmpl_adw": "self.version"
-    },
-    "require": {
-        "fluidtypo3/vhs": "^4.2"
-    },
-    "conflict": {
-        "friendsoftypo3/mediace": "*"
+        "be_ipoa": "self.version"
     }
 }
