@@ -1,0 +1,20 @@
+{
+    "name": "subugoe/be_ipoa",
+    "type": "typo3-cms-extension",
+    "description": "Template backend of IPOA Website",
+    "homepage": "http://open-access.net",
+    "license": ["GPL-2.0+"],
+    "keywords": ["TYPO3 CMS", "sub"],
+    "support": {
+        "issues": "https://github.com/subugoe/typo3-be_ipoa/issues"
+    },
+    "replace": {
+        "tmpl_adw": "self.version"
+    },
+    "require": {
+        "fluidtypo3/vhs": "^4.2"
+    },
+    "conflict": {
+        "friendsoftypo3/mediace": "*"
+    }
+}
